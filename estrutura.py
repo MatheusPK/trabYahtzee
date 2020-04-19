@@ -21,6 +21,10 @@ def inputRelancar():
         index = int(input("(%d)Qual dado? " % (i+1)))
         indexDados.append(index - 1)
     return indexDados
+
+def inputEscolheJogada():
+    #Essa funcao sera substituida por uma do Interface Grafica
+    return input("Qual jogada gostaria de fazer? ")
     
 
 def jogada(jogador):
@@ -36,6 +40,8 @@ def jogada(jogador):
         lancaDados(dados, dadosIndex)
         print(dados)
         n += 1
+    escolha = inputEscolheJogada()
+    marcaJogada(jogador, escolha, dados)
     
 
 def controle():
@@ -45,8 +51,12 @@ def controle():
         for jogador in jogadores:
             print('Rodada %d - %s' % (rodada+1, jogador["nome"]))
             jogada(jogador)
-            
+            print(jogador)
         rodada += 1
+    for jogador in jogadores:
+        atualizaTotal(jogador)
+        print(jogador)
+    
     
 
 

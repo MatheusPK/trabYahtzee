@@ -1,4 +1,4 @@
-__all__ = ["criaTabela"]
+__all__ = ["criaTabela", "marcaJogada", "atualizaTotal"]
 
 def criaTabela(nome):
     dic =   {
@@ -10,7 +10,6 @@ def criaTabela(nome):
         "cinco" : 0,
         "seis" : 0,
     
-        "bônusSup" : 0,
         "totalSup" : 0,
 
         "trinca" : 0,
@@ -31,4 +30,23 @@ def criaTabela(nome):
     #print(dic)
 
     return dic
+
+def marcaJogada(jogador, escolha, dados):
+    dic = {"um": 1, "dois" : 2, "três" : 3, "quatro" : 4, "cinco" : 5, "seis" : 6}
+    pontos = dados.count(dic[escolha])*dic[escolha]
+    jogador[escolha] = pontos
+
+def atualizaTotal(jogador):
+    limiteBonus = 63
+    valorBonus = 35
+    pontoSup = ["um", "dois", "três", "quatro", "cinco", "seis"]
+    totalSup = 0
+    for ponto in pontoSup:
+        totalSup += jogador[ponto]
+    if totalSup >= limiteBonus:
+        totalSup += valorBonus
+    
+    
+    
+    
     
