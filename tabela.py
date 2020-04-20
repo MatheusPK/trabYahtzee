@@ -9,8 +9,6 @@ def criaTabela(nome):
         "quatro" : 0,
         "cinco" : 0,
         "seis" : 0,
-    
-        "totalSup" : 0,
 
         "trinca" : 0,
         "quadra" : 0,
@@ -21,7 +19,6 @@ def criaTabela(nome):
         "chance" : 0,
 
         "bônusYahtzee" : 0,
-        "totalInf" : 0,
 
         "total" : 0
         
@@ -36,16 +33,30 @@ def marcaJogada(jogador, escolha, dados):
     pontos = dados.count(dic[escolha])*dic[escolha]
     jogador[escolha] = pontos
 
+    #falta pontuar parte inferior
+    
+
 def atualizaTotal(jogador):
     limiteBonus = 63
     valorBonus = 35
     pontoSup = ["um", "dois", "três", "quatro", "cinco", "seis"]
+    pontoInf = ["trinca", "quadra", "fullHouse", "seqMin",
+                "seqMax", "yahtzee", "chance", "bônusYahtzee"]
     totalSup = 0
+    totalInf = 0
     for ponto in pontoSup:
         totalSup += jogador[ponto]
     if totalSup >= limiteBonus:
         totalSup += valorBonus
+        
+    for ponto in pontoInf:
+        totalInf += jogador[ponto]
+
+    jogador["total"] = totalSup + totalInf
+
+
     
+
     
     
     

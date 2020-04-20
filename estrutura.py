@@ -42,6 +42,15 @@ def jogada(jogador):
         n += 1
     escolha = inputEscolheJogada()
     marcaJogada(jogador, escolha, dados)
+
+def vencedor():
+    indexVencedor = 0
+    n = len(jogadores)
+    for i in range(n):
+        if jogadores[i]["total"] > jogadores[indexVencedor]["total"]:
+            indexVencedor = i
+    print("Vencedor: %s" % jogadores[indexVencedor]["nome"])
+    
     
 
 def controle():
@@ -53,9 +62,11 @@ def controle():
             jogada(jogador)
             print(jogador)
         rodada += 1
+    print("////////Fim//////")
     for jogador in jogadores:
         atualizaTotal(jogador)
         print(jogador)
+    vencedor()
     
     
 

@@ -12,4 +12,8 @@ nomes = inputNomes()
 criaJogadores(nomes)
 controle()
 
+#acabar marcaJogada() -> (parteInf, verificar ja feitas, zero)
+#arrumar controle/main
+#verificar jogadas possiveis
+
 
