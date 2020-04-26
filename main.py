@@ -2,7 +2,7 @@ from estrutura import *
 
 def inputNomes():
     t = []
-    n = int(input("Qnts jogadoers? "))
+    n = int(input("Qnts jogadores? "))
     for i in range(n):
         nome = input("Qual nome do jogador %d? " % (i+1))
         t.append(nome)
