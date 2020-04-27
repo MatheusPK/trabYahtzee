@@ -5,13 +5,21 @@ __all__ = ["criaJogadores", "controle"]
 
 jogadores = []
 
-numRodadas = 1
+numRodadas = 13
 
 def criaJogadores(nomes):
     global jogadores
     for nome in nomes:
         jogadores.append(criaTabela(nome))
 
+def inputNomes():
+    #Essa funcao sera substituida por uma do Interface Grafica
+    t = []
+    n = int(input("Qnts jogadores? "))
+    for i in range(n):
+        nome = input("Qual nome do jogador %d? " % (i+1))
+        t.append(nome)
+    return t
 
 def inputRelancar():
     #Essa funcao sera substituida por uma do Interface Grafica
@@ -22,9 +30,21 @@ def inputRelancar():
         indexDados.append(index - 1)
     return indexDados
 
-def inputEscolheJogada():
+def inputEscolheJogada(jogadas):
     #Essa funcao sera substituida por uma do Interface Grafica
-    return input("Qual jogada gostaria de fazer? ")
+    print("Qual jogada gostaria de fazer?")
+    for i in range(len(jogadas)):
+        print("Digite %d para jogada %s" % (i+1, jogadas[i]))
+    escolha = int(input())
+    return jogadas[escolha-1]
+
+def inputZeraEscolha(jogadas):
+    #Essa funcao sera substituida por uma do Interface Grafica
+    print("Qual jogada gostaria de zerar?")
+    for i in range(len(jogadas)):
+        print("Digite %d para jogada %s" % (i+1, jogadas[i]))
+    escolha = int(input())
+    return jogadas[escolha-1]
     
 
 def jogada(jogador):
@@ -40,8 +60,22 @@ def jogada(jogador):
         lancaDados(dados, dadosIndex)
         print(dados)
         n += 1
-    escolha = inputEscolheJogada()
-    marcaJogada(jogador, escolha, dados)
+        
+    jogadasPossiveis = analisaPadrao(dados)
+    jogadasPossiveis = removeRepetidas(jogador, jogadasPossiveis)
+    
+    if jogadasPossiveis == []:
+        print("Nenhuma jogada disponível!")
+        naofeitas = jogadasNaoFeitas(jogador)
+        escolha = inputZeraEscolha(naofeitas)
+        jogador[escolha] = 0
+    else:
+        escolha = inputEscolheJogada(jogadasPossiveis)
+        marcaJogada(jogador, escolha, dados)
+        if escolha == "yahtzee" and jogador[escolha] > 50:
+            naofeitas = jogadasNaoFeitas(jogador)
+            escolha = inputZeraEscolha(naofeitas)
+            jogador[escolha] = 0
 
 def vencedor():
     indexVencedor = 0
@@ -51,10 +85,13 @@ def vencedor():
             indexVencedor = i
     print("Vencedor: %s" % jogadores[indexVencedor]["nome"])
     
-    
 
 def controle():
     global jogadores
+    
+    nomes = inputNomes()
+    criaJogadores(nomes)
+    
     rodada = 0
     while rodada < numRodadas:
         for jogador in jogadores:
