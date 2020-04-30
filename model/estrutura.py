@@ -78,6 +78,7 @@ def jogada(jogador):
             jogador[escolha] = 0
 
 def vencedor():
+    global jogadores
     indexVencedor = 0
     n = len(jogadores)
     for i in range(n):
@@ -99,7 +100,7 @@ def controle():
             jogada(jogador)
             print(jogador)
         rodada += 1
-    print("////////Fim//////")
+    print("////////Fim////////")
     for jogador in jogadores:
         atualizaTotal(jogador)
         print(jogador)
